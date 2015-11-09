@@ -5,10 +5,14 @@ class Sprints < Version
 
   class << self
     def open_sprints(project)
-      where("status = 'open' and project_id = ?", project.id).order('ir_start_date ASC, ir_end_date ASC')
+      projects = []
+      Project.find(:all, :select => 'id', :conditions => ["id = ? or parent_id = ?", project.id, project.id]).each{|proj| projects << proj.id}
+      scoped(:order => 'ir_start_date ASC, ir_end_date ASC', :conditions => [ "status = 'open' and project_id in (?)", projects ])
     end
     def all_sprints(project)
-      where("project_id = ?", project.id).order("ir_start_date ASC, ir_end_date ASC")
+      projects = []
+      Project.find(:all, :select => 'id', :conditions => ["id = ? or parent_id = ?", project.id, project.id]).each{|proj| projects << proj.id}
+      scoped(:order => 'ir_start_date ASC, ir_end_date ASC', :conditions => [ "project_id in (?)", projects ])
     end
   end
 

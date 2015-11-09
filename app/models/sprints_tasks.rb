@@ -6,8 +6,10 @@ class SprintsTasks < Issue
   ORDER = 'case when issues.ir_position is null then 1 else 0 end ASC, case when issues.ir_position is NULL then issues.id else issues.ir_position end ASC'
 
   def self.get_tasks_by_status(project, status, sprint, user)
+    projects = []
     tasks = []
-    cond = ["issues.project_id = ? and status_id = ?", project.id, status]
+    Project.find(:all, :select => 'id', :conditions => ["id = ? or parent_id = ?", project.id, project.id]).each{|proj| projects << proj.id}
+    cond = ["issues.project_id in (?) and status_id = ?", projects, status]
     unless sprint.nil?
       if sprint == 'null'
         cond[0] += ' and fixed_version_id is null'
@@ -21,15 +23,16 @@ class SprintsTasks < Issue
       user = User.current.id if user == 'current'
       cond << user
     end
-    #SprintsTasks.find(:all, :select => 'issues.*, sum(hours) as spent', :order => SprintsTasks::ORDER, :conditions => cond, :group => "issues.id",
-    #                  :joins => [:status], :joins => "left join time_entries ON time_entries.issue_id = issues.id", :include => [:assigned_to]).each{|task| tasks << task}
-    SprintsTasks.where(cond).select('issues.*, sum(hours) as spent').order(SprintsTasks::ORDER).group("issues.id").joins(:status).joins("left join time_entries ON time_entries.issue_id = issues.id").includes(:assigned_to).each{|task| tasks << task}
+    SprintsTasks.find(:all, :select => 'issues.*, sum(hours) as spent', :order => SprintsTasks::ORDER, :conditions => cond, :group => "issues.id",
+                      :joins => [:status], :joins => "left join time_entries ON time_entries.issue_id = issues.id", :include => [:assigned_to]).each{|task| tasks << task}
     return tasks
   end
 
   def self.get_tasks_by_sprint(project, sprint)
+    projects = []
     tasks = []
-    cond = ["project_id = ?", project.id]
+    Project.find(:all, :select => 'id', :conditions => ["id = ? or parent_id = ?", project.id, project.id]).each{|proj| projects << proj.id}
+    cond = ["project_id in (?) and is_closed = ?", projects, false]
     unless sprint.nil?
       if sprint == 'null'
         cond[0] += ' and fixed_version_id is null'
@@ -38,7 +41,7 @@ class SprintsTasks < Issue
         cond << sprint
       end
     end
-    SprintsTasks.where(cond).joins(:status).includes(:assigned_to).order(SprintsTasks::ORDER).each{|task| tasks << task}
+    SprintsTasks.find(:all, :order => SprintsTasks::ORDER, :conditions => cond, :joins => :status, :include => :assigned_to).each{|task| tasks << task}
     return tasks
   end
 
