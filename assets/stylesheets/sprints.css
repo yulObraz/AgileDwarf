@@ -167,6 +167,7 @@ a.task_estimate input{
 {
     margin: 0 10px 10px 0;
     width: 100%;
+    font-size: 12px;
 }
 
 .task_doneratio_slide

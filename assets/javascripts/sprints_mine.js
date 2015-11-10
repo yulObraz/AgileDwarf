@@ -224,7 +224,7 @@
                         var done_perc = 0;
                         if (ownerData.est)
                             done_perc = Math.round((ownerData.done * 100) / ownerData.est);
-                        times += '<div class="sprint_time">' + owner + ': ' + done_perc + '% / ' + ownerData.est + 'h<span class="fr">' + ownerData.spent + 'h</span></div>';
+                        times += '<div class="sprint_time"><b>' + owner + '</b>: ' + done_perc + '% / ' + ownerData.est.toFixed(2) + 'h<span class="fr">' + ownerData.spent.toFixed(2) + 'h</span></div>';
                     }
                     column.element.children('.time_list').html(times);
                     return obj;
