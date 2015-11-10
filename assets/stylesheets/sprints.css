@@ -1,8 +1,9 @@
 #tasks
 {
-    margin: 0 5% 0 5%;
+    /*margin: 0 5% 0 5%;
     width: 90%;
-    float: left;
+    float: left;*/
+    min-width:1000px;
 }
 
 .sprints_column
@@ -53,13 +54,14 @@
 .task_panel
 {
     float: left;
-    margin: 0 1% 0 1%;
+    margin: 0 2px 0 2px;
     width: 31%;
     border: 1px solid #C9C9C9;
     background: #FDFBFF;
     border-radius: 3px;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
+    max-width: 240px;
 }
 
 .task_panel h3, .sprints_panel h3
@@ -129,6 +131,12 @@
 .sc_task .task_estimate_sep
 {
     margin: 0 5px 0 5px;
+}
+
+a.task_estimate input{
+    width: 15px;
+    font-size: 10px;
+    height: 15px;
 }
 
 #show_closed_sprints
@@ -270,5 +278,13 @@
     border-radius: 5px;
     padding: 3px 5px 3px 5px;
     color: #777
+}
+
+#sidebar{
+	display:none;
+}
+
+#content{
+	margin-right: 0 !important;
 }
 

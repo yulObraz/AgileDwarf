@@ -4,7 +4,7 @@ ru:
   label_menu_mytasks: Доска Scrum
   label_menu_burndown: Отчеты
   label_burndown_series_spent: Затраченное время
-  label_burndown_series_rest: Расчетное время
+  label_burndown_series_rest: Расч. вр.
   label_burndown_series_total: Всего
   label_burndown_axis_y_name: Часы
   label_backlog: Backlog
