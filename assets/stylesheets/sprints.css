@@ -42,11 +42,11 @@
 {
     float: left;
     width: 100%;
-    border: 1px solid black;
-    background: #E3E3E3;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
+    border: 1px solid #C9C9C9;
+    background: #FDFBFF;
+    border-radius: 0px;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
     margin-bottom: 20px;
 }
 
@@ -55,8 +55,8 @@
     float: left;
     margin: 0 1% 0 1%;
     width: 31%;
-    border: 1px solid black;
-    background: #E3E3E3;
+    border: 1px solid #C9C9C9;
+    background: #FDFBFF;
     border-radius: 3px;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
@@ -93,22 +93,38 @@
     cursor: pointer;
     overflow: hidden;
     height: 1%;
-    background: white;
+    background: #FFFFCC;
     padding: 7px;
-    border: 1px solid black;
+    border: 1px solid #AEAEAE;
     margin: 3px;
-    border-radius: 2px;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
+    border-radius: 0px;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    box-shadow: 1px 1px 2px #d8d8d8;
 }
 
 .sc_task .task_subject
 {
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
 }
+
+.sc_task .task_owner, .sc_task .task_estimate, .sc_task .estimate_unit{
+	font-size: 12px;
+}
+
+.actlink{
+	text-decoration: none;
+	border-bottom: 1px dashed #2996cc;	
+}
+
+.actlink:hover{
+	text-decoration: none;
+	border-bottom: 1px dashed #c61a1a;
+}
+
+
+
 
 .sc_task .task_estimate_sep
 {
@@ -148,7 +164,7 @@
 .task_doneratio_slide
 {
     margin: 5px;
-    width: 50%;
+    width: 35%;
     float: left;
 }
 
@@ -185,7 +201,13 @@
     border: 1px solid black;
     margin-left: 5px;
     padding: 2px 7px;
+
 }
+
+.task_doneratio_value, .task_add_spent, .task_estimate_params{
+	    font-size: 12px;
+}
+
 
 .task_desc
 {
@@ -211,3 +233,42 @@
 {
     margin-right: 5px;
 }
+
+
+.task_tracker{
+	display: inline-block;
+	padding: 2px 5px 2px 5px;
+	background-color: #515151;
+	border-radius: 5px;
+	text-align: center
+
+}
+
+.task_tracker a{
+	color: white;
+	text-decoration: underline;
+	font-size: 12px;
+}
+
+.task_tracker_1 {
+		background-color: #911102;
+}
+
+.task_tracker_2 {
+		background-color: #385692;
+}
+
+.task_tracker_3 {
+		background-color: #E85000;
+}
+
+
+
+.task_status{
+    font-size: 12px;
+    border: 1px solid #777;
+    border-radius: 5px;
+    padding: 3px 5px 3px 5px;
+    color: #777
+}
+

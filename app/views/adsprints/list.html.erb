@@ -102,11 +102,15 @@
 
 <div id="task_template" class="hidden">
     <div class="sc_task new">
-      <div class="fl task_no"></div>
-      <div class="fl task_desc"><img src="<%= File.join(@plugin_path, 'images', 'task_desc.png') %>"/></div>
+      <div class="task_no task_tracker">
+      	<span class="task_track_num"></span>
+      	<img src="<%= File.join(@plugin_path, 'images', 'task_desc.png') %>"/>
+      </div>
+      <div class="task_desc"></div>
       <div class="task_subject"></div>
-      <div class="task_estimate fl"></div>
-      <div class="task_owner fr"></div>
+      <hr class="horline"/>
+      <a class="task_estimate fl actlink"></a>
+      <a class="task_owner fr actlink"></a>
     </div>
 </div>
 

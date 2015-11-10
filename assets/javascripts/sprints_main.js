@@ -388,7 +388,7 @@
                     var task = $('#task_template').children(':eq(0)').clone().prependTo($('.task_list', el));
                     task.prop('id', 'task.' + data);
                     el.sortable("refresh");
-                    task.children('.task_no').html('<a href="' + Sprints.getUrl('issues') + '/' + data + '">#' + data + '</a>');
+                    task.find('.task_no small').html('<a href="' + Sprints.getUrl('issues') + '/' + data + '">#' + data + '</a>');
                     var taskObj = new Sprints.Task(task, sprint, true);
                     sprint.tasks[task.id] = taskObj;
                     sprint.times.addTask(taskObj);

@@ -1,7 +1,13 @@
 <div id="task.<%=h task.id %>" class="sc_task <%= @closed_status.include?(task.status_id) ? 'closed_task' : '' %>">
-  <div class="fl task_no">#<%= link_to task.id, :controller => 'issues', :action => 'show', :id => task %></div>
-  <div class="fl task_desc"><img src="<%= File.join(@plugin_path, 'images', 'task_desc.png') %>"/></div>
-  <div class="task_subject"><%=h task.subject %></div>
-  <div class="task_estimate fl"><%=h task.estimated_hours || l(:label_sprints_placeholder_estimated) %></div>&nbsp;h
-  <div class="task_owner fr"><%=h task.assigned_to %></div>
+  <div class="task_no">
+  	<span class="task_track_num task_tracker task_tracker_<%=h task.tracker.id %>">
+  		<%= link_to [task.tracker, "#", task.id].join(" "),:controller => 'issues', :action => 'show', :id => task %> 
+  	</span>
+  	<span class="task_status"><%=h task.status%></span>
+  	<img src="<%= File.join(@plugin_path, 'images', 'task_desc.png') %>" class="task_desc" width="12"/>
+  </div>
+  <div class="task_subject"><%=h task.subject  %></div>
+  <hr class="horline"/>
+  <a class="task_estimate fl actlink"><%=h task.estimated_hours || l(:label_sprints_placeholder_estimated) %></a>&nbsp;<span class="estimate_unit">h</span>
+  <a class="fr task_owner actlink"><%=h task.assigned_to %></a>
 </div>

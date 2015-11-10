@@ -1,18 +1,30 @@
 <div id="task.<%=h task.id %>" class="sc_task">
-  <div class="fl task_no">#<%= link_to task.id, :controller => 'issues', :action => 'show', :id => task %></div>
-  <div class="fl task_desc"><img src="<%= File.join(@plugin_path, 'images', 'task_desc.png') %>"/></div>
+    <div class="task_no">
+  	<span class="task_track_num task_tracker task_tracker_<%=h task.tracker.id %>">
+  		<%= link_to [task.tracker, "#", task.id].join(" "),:controller => 'issues', :action => 'show', :id => task %> 
+  	</span>
+  	<img src="<%= File.join(@plugin_path, 'images', 'task_desc.png') %>" class="task_desc" width="12"/>
+  </div>
+  
+  
   <div class="task_subject" title="<%=h task.subject %>"><%=h task.subject %></div>
+  
+  <hr class="horline"/>
+
+  
   <div class="task_row">
       <div class="task_doneratio_slide"></div>
-      <div class="task_owner fr"><%=h task.assigned_to %></div>
+      <a class="task_owner fr actlink"><%=h task.assigned_to %></a>
   </div>
+  
   <div class="task_doneratio_value fl"><%=h task.done_ratio || '0' %></div>
   <div class="fl task_estimate_params">
       <div class="measure fl">%</div>
       <div class="fl task_estimate_sep">/</div>
-      <div class="task_estimate fl"><%=h task.estimated_hours || l(:label_sprints_placeholder_estimated) %></div>
+      <a class="task_estimate fl actlink"><%=h task.estimated_hours || l(:label_sprints_placeholder_estimated) %></a>
       <div class="measure fl">h</div>
   </div>
+  
   <div class="task_add_spent fr">
     <div class="task_add_spent_value fr">X</div>
     <div class="measure fr">+</div>
