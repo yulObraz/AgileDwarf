@@ -31,6 +31,6 @@
   </div>
   <div class="fr task_estimate_params">
       <div class="measure fr">h</div>
-      <div class="fr task_spent_time"><%=h task.spent || '0' %></div>
+      <div class="fr task_spent_time"><%=h task.spent.to_f.round(2) || '0' %></div>
   </div>
 </div>
