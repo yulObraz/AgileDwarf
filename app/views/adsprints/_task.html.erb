@@ -5,7 +5,8 @@
   		<%= link_to image_tag(File.join(@plugin_path, 'images', 'new_window.svg'),size: "16x13"),{:controller => 'issues', :action => 'show', :id => task}, :target=>'_blank' %>
   	</span>
   	
-  	<span class="task_status"><%=h task.status%></span>
+   	<span class="task_status" title="<% if defined?(task.uis_unread) &&  (task.uis_unread==true)%><%=h l(:label_task_unread)%><%end%><% if defined?(task.uis_updated) &&  (task.uis_updated==true)%><%=h l(:label_task_updated)%><%end%>"><%=h task.status%></span>
+   	
   	<img src="<%= File.join(@plugin_path, 'images', 'task_desc.png') %>" class="task_desc" width="12"/>
   </div>
   <div class="task_subject"><%=h task.subject  %></div>

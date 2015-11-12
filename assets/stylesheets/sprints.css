@@ -72,6 +72,11 @@
     border: 0;
 }
 
+.task_panel .task_status{
+	border: none !important;
+	padding: 0 !important 
+}
+
 .task_list .sc_task.active
 {
     border-color: #1F6993;
@@ -292,4 +297,33 @@ a.task_estimate input{
 #content{
 	margin-right: 0 !important;
 }
+
+
+
+
+.sc_task.unread .task_status:after {
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #B2CB6C;
+    border-radius: 50%;
+    margin-right: 4px;
+    margin-left: 4px;
+    margin-bottom: -1px;
+}
+
+.sc_task.updated .task_status:after {
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #5390CA;
+    border-radius: 50%;
+    margin-right: 4px;
+    margin-left: 4px;
+    margin-bottom: -1px;
+}
+
+
 

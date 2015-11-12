@@ -42,3 +42,5 @@ ru:
   label_settings_column4status: Статус для 4-ой колонки
   label_settings_column5status: Статус для 5-ой колонки
   label_settings_columncount: Количество колонок
+  label_task_unread: Непрочитанная задача
+  label_task_updated: Есть обновления в задаче
