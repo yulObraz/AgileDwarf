@@ -1,4 +1,4 @@
-<div id="task.<%=h task.id %>" class="sc_task <%= @closed_status.include?(task.status_id) ? 'closed_task' : '' %>">
+<div id="task.<%=h task.id %>" class="sc_task <%= @closed_status.include?(task.status_id) ? 'closed_task' : '' %> sc_<%= task.css_classes %>">
   <div class="task_no">
   	<span class="task_track_num task_tracker task_tracker_<%=h task.tracker.id %>">
   		<%= link_to [task.tracker, "#", task.id].join(" "),:controller => 'issues', :action => 'show', :id => task %> 
