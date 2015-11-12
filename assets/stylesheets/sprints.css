@@ -250,13 +250,17 @@ a.task_estimate input{
 	background-color: #515151;
 	border-radius: 5px;
 	text-align: center
-
 }
+
 
 .task_tracker a{
 	color: white;
 	text-decoration: underline;
 	font-size: 12px;
+}
+
+.task_tracker a:hover{
+	opacity: 0.6;
 }
 
 .task_tracker_1 {

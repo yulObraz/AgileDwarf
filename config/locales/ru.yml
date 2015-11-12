@@ -4,7 +4,7 @@ ru:
   label_menu_mytasks: Доска Scrum
   label_menu_burndown: Отчеты
   label_burndown_series_spent: Затраченное время
-  label_burndown_series_rest: Расч. вр.
+  label_burndown_series_rest: Расчетное время
   label_burndown_series_total: Всего
   label_burndown_axis_y_name: Часы
   label_backlog: Backlog
@@ -13,7 +13,7 @@ ru:
   label_sprints_placeholder_name: "Спринт "
   label_sprints_placeholder_startdate: "[Дата начала]"
   label_sprints_placeholder_enddate: "[Дата окончания]"
-  label_sprints_placeholder_estimated: "Расчетное время"
+  label_sprints_placeholder_estimated: "Расч. вр."
   label_sprints_placeholder_subject: "[Название]"
   label_sprints_placeholder_owner: "[ Не назначено ]"
   label_sprints_placeholder_done: "[Степень исполнения]"
