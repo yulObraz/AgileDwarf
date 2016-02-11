@@ -25,6 +25,7 @@
             this.done = (+el.children('.task_doneratio_value').text() / 100) * time;
             this.spent = +el.find('.task_spent_time').text();
             this.owner = el.find('.task_owner').text();
+            this.remains=el.find('task_remains_time').text();
 
             // register inline
             var taskInlineOpts =
@@ -53,16 +54,23 @@
                 var timeNew = (res / 100) * task.est;
                 panel.times.updateTaskDone(task, timeNew).update();
                 task.done = timeNew;
+                task.remains=task.est-task.spent;
+                var remains=el.find('.task_remains_time');
+                remains.text(task.remains.toFixed(2))
+                
             }}, taskInlineOpts));
             // spent
-            $('.task_add_spent_value', el).editable(Sprints.getUrl('taskspent'), $.extend({name: 'hours', type: 'text', placeholder: 'X', width: 50, event: 'addspent', callback: function (res, settings)
+            $('.task_add_spent_value', el).editable(Sprints.getUrl('taskspent'), $.extend({name: 'hours', type: 'ptext', placeholder: 'X', event: 'addspent', callback: function (res, settings)
             {
                 $(this).html('X');
                 var spent = el.find('.task_spent_time');
+                var remains=el.find('.task_remains_time')
                 var timeNew = +spent.text() + (+res);
                 spent.text(timeNew);
                 panel.times.updateTaskSpent(task, timeNew).update();
                 task.spent = timeNew;
+                task.remains=task.est-task.spent;
+                remains.text(task.remains.toFixed(2))
             }}, taskInlineOpts));
             // owner
             $('.task_owner', el).editable(Sprints.getUrl('taskinline'), $.extend({name: 'assigned_to_id', type: 'select', onblur : 'submit', placeholder: Sprints.l('task_owner_placeholder'),
@@ -224,7 +232,7 @@
                         var done_perc = 0;
                         if (ownerData.est)
                             done_perc = Math.round((ownerData.done * 100) / ownerData.est);
-                        times += '<div class="sprint_time"><b>' + owner + '</b>: ' + done_perc + '% / ' + ownerData.est.toFixed(2) + 'h<span class="fr">' + ownerData.spent.toFixed(2) + 'h</span></div>';
+                        times += '<div class="sprint_time"><b>' + owner + '</b>: ' + ownerData.est.toFixed(2) + 'h / ' + ownerData.spent.toFixed(2) + 'h<span class="fr">' + (ownerData.est-ownerData.spent).toFixed(2) + 'h</span></div>';
                     }
                     column.element.children('.time_list').html(times);
                     return obj;

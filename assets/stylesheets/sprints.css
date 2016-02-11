@@ -116,7 +116,7 @@
     text-overflow: ellipsis;
 }
 
-.sc_task .task_owner, .sc_task .task_estimate, .sc_task .estimate_unit{
+.sc_task .task_owner, .sc_task .task_estimate, .sc_task .estimate_unit, .remains_time{
 	font-size: 12px;
 }
 
@@ -138,7 +138,7 @@
     margin: 0 5px 0 5px;
 }
 
-a.task_estimate input{
+a.task_estimate input, .task_add_spent_value input{
     width: 15px;
     font-size: 10px;
     height: 15px;
@@ -197,24 +197,17 @@ a.task_estimate input{
 {
     width: 100%;
     float: left;
+    height:20px;
 }
 
 .task_estimate_params
 {
-    padding: 2px 0;
+    /*padding: 2px 0;*/
 }
 
-.task_add_spent:hover
-{
-    background: #e4edff;
-}
 
 .task_add_spent
 {
-    background: white;
-    border: 1px solid black;
-    margin-left: 5px;
-    padding: 2px 7px;
 
 }
 
@@ -323,6 +316,72 @@ a.task_estimate input{
     margin-right: 4px;
     margin-left: 4px;
     margin-bottom: -1px;
+}
+
+.sc_task.priority-4 .priority{
+	display: none
+}
+
+
+
+.sc_task .priority{
+		font-size: 12px;
+		display: inline-block;
+}
+
+.sc_task.priority-5 .priority{
+	border: 1px solid rgb(146, 0, 0);;
+	border-radius: 3px;
+	color:rgb(146, 0, 0);
+	font-size: 12px;
+	padding: 1px 3px 1px 3px;
+}
+
+.sc_task.priority-6 .priority{
+	border: 1px solid rgb(146, 0, 0);
+	border-radius: 3px;
+	color:white;
+	font-size: 12px;
+	padding: 1px 3px 1px 3px;
+	background-color: rgb(146, 0, 0);
+}
+
+.sc_task.priority-7 .priority{
+	border: 1px solid rgb(146, 0, 0);
+	border-radius: 3px;
+	color:white;
+	font-size: 12px;
+	padding: 1px 3px 1px 3px;
+	background-color: rgb(146, 0, 0);
+	animation: blinker 3s linear infinite;
+	font-weight: bold;
+}
+@keyframes blinker {0%{opacity:1;} 20%{opacity:0;} 23%{opacity:1;} 100%{opacity:1;}}
+
+.sc_task .deadline{
+	font-size: 12px;
+	font-weight: normal;
+	color:gray
+}
+
+
+.sc_task .deadline.dl_today{
+	font-weight: bold;
+	color:#c94f08
+}
+
+.sc_task .deadline.dl_tomorrow{
+	color:#c94f08
+}
+
+.sc_task .deadline.dl_aftertomorrow{
+	color:green
+}
+
+.sc_task .deadline.dl_overdued{
+	color:red;
+	font-weight: bold;
+	animation: blinker 1s linear infinite;
 }
 
 

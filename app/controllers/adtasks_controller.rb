@@ -1,10 +1,15 @@
 class AdtasksController < ApplicationController
   unloadable
 
+
+	
+
+
   before_filter :find_project, :authorize
 
   def list
     # data for filters
+    @project = Project.find(params[:project_id])
     @sprints = Sprints.open_sprints(@project)
     @project_id = @project.id
     @assignables = @project.assignable_users
@@ -39,6 +44,11 @@ class AdtasksController < ApplicationController
       @columns << {:tasks => SprintsTasks.get_tasks_by_status(@project, status_ids[i], sprint, user), :id => status_ids[i]}
     end
   end
+
+
+  
+  
+
 
   private
 

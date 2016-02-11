@@ -100,7 +100,7 @@
   </div>
 </div>
 
-<div id="task_template" class="hidden">
+<!--<div id="_task_template" class="hidden">
     <div class="sc_task new">
       <div class="task_no task_tracker">
       	<span class="task_track_num"></span>
@@ -112,7 +112,37 @@
       <a class="task_estimate fl actlink"></a>
       <a class="task_owner fr actlink"></a>
     </div>
+</div>-->
+
+
+
+<div id="task_template" class="hidden">
+<div id="" class="sc_task hascontextmenu">
+  <div class="task_no">
+  	<span class="task_track_num task_tracker">
+  		<%#= link_to [task.tracker, "#", task.id].join(" "),:controller => 'issues', :action => 'show', :id => task %> 
+  		<%#= link_to image_tag(File.join(@plugin_path, 'images', 'new_window.svg'),size: "16x13"),{:controller => 'issues', :action => 'show', :id => task}, :target=>'_blank' %>
+  	</span>
+  	   	
+  	<img src="<%= File.join(@plugin_path, 'images', 'task_desc.png') %>" class="task_desc" width="12"/>
+  </div>
+  <div class="task_subject"></div>
+
+  <hr class="horline"/>
+  <a class="task_estimate fl actlink"></a>&nbsp;<span class="estimate_unit">h</span>
+  <a class="fr task_owner actlink"></a>
 </div>
+</div>
+
+
+
+
+
+
+
+
+
+
 
 <div id="sprint_close_error" title="<%= l(:label_sprints_dialogs_closeerror_title) %>" class="hidden">
   <p>

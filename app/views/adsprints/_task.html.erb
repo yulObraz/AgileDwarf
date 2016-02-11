@@ -1,4 +1,4 @@
-<div id="task.<%=h task.id %>" class="sc_task <%= @closed_status.include?(task.status_id) ? 'closed_task' : '' %> sc_<%= task.css_classes %>">
+<div id="task.<%=h task.id %>" class="sc_task <%= @closed_status.include?(task.status_id) ? 'closed_task' : '' %> sc_<%= task.css_classes %> hascontextmenu">
   <div class="task_no">
   	<span class="task_track_num task_tracker task_tracker_<%=h task.tracker.id %>">
   		<%= link_to [task.tracker, "#", task.id].join(" "),:controller => 'issues', :action => 'show', :id => task %> 
@@ -10,6 +10,41 @@
   	<img src="<%= File.join(@plugin_path, 'images', 'task_desc.png') %>" class="task_desc" width="12"/>
   </div>
   <div class="task_subject"><%=h task.subject  %></div>
+
+	<%if defined?(task.priority) %>  
+		<span class="priority"><%=task.priority%></span>
+  	<%end%>
+
+  
+	<%if defined?(task.due_date) && task.due_date   	
+			  if((task.due_date-Date.today).to_i)==0 
+				dl_word="Сегодня"
+				dl_class="dl_today"
+			  elsif((task.due_date-Date.today).to_i)==1 
+				dl_word="Завтра"
+				dl_class="dl_tomorrow"
+			  elsif((task.due_date-Date.today).to_i)==2 
+				dl_word="Послезавтра"
+				dl_class="dl_aftertomorrow"
+			  elsif((task.due_date-Date.today).to_i)==-1 
+				dl_word="Вчера"
+				dl_class="dl_yesterday dl_overdued"
+			  elsif((task.due_date-Date.today).to_i)==-2
+				dl_word="Позавчера"
+				dl_class="dl_beforeyesterday dl_overdued"
+			  elsif((task.due_date-Date.today).to_i)<0 		
+				dl_word=distance_of_date_in_words(Date.today, task.due_date) + " назад"
+				dl_class="dl_hardoverdued dl_overdued"
+			  else
+				dl_word= "через " + distance_of_date_in_words(Date.today, task.due_date)
+			  end
+		%>	  
+		<span class="deadline <%=dl_class%>">Срок: <%=dl_word%></span>
+	<%end%> 
+	
+	
+
+
   <hr class="horline"/>
   <a class="task_estimate fl actlink"><%=h task.estimated_hours || l(:label_sprints_placeholder_estimated) %></a>&nbsp;<span class="estimate_unit">h</span>
   <a class="fr task_owner actlink"><%=h task.assigned_to %></a>

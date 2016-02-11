@@ -27,6 +27,30 @@ class SprintsTasks < Issue
                       :joins => [:status], :joins => "left join time_entries ON time_entries.issue_id = issues.id", :include => [:assigned_to]).each{|task| tasks << task}
     return tasks
   end
+  
+  
+  def self.get_all_tasks_by_status(status, sprint, user)
+    tasks = []
+    cond = ["status_id = ?", status]
+    unless sprint.nil?
+      if sprint == 'null'
+        cond[0] += ' and fixed_version_id is null'
+      else
+        cond[0] += ' and fixed_version_id = ?'
+        cond << sprint
+      end
+    end
+    unless user.nil?
+      cond[0] += ' and assigned_to_id = ?'
+      user = User.current.id if user == 'current'
+      cond << user
+    end
+    SprintsTasks.find(:all, :select => 'issues.*, sum(hours) as spent', :order => SprintsTasks::ORDER, :conditions => cond, :group => "issues.id",
+                      :joins => [:status], :joins => "left join time_entries ON time_entries.issue_id = issues.id", :include => [:assigned_to]).each{|task| tasks << task}
+    return tasks
+  end  
+  
+  
 
   def self.get_tasks_by_sprint(project, sprint)
     projects = []

@@ -388,7 +388,8 @@
                     var task = $('#task_template').children(':eq(0)').clone().prependTo($('.task_list', el));
                     task.prop('id', 'task.' + data);
                     el.sortable("refresh");
-                    task.find('.task_no small').html('<a href="' + Sprints.getUrl('issues') + '/' + data + '">#' + data + '</a>');
+                    task.find('.task_track_num ').html('<a href="' + Sprints.getUrl('issues') + '/' + data + '">#' + data + '</a>' + '<a target="_blank" href="' + Sprints.getUrl('issues') + '/' + data + '"><img src="/plugin_assets/AgileDwarf/images/new_window.svg" width="16" height="13"></a>');
+                    task.attr('id','task.'+data);
                     var taskObj = new Sprints.Task(task, sprint, true);
                     sprint.tasks[task.id] = taskObj;
                     sprint.times.addTask(taskObj);
