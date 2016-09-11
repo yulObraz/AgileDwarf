@@ -1,0 +1,90 @@
+<div id="task.<%=h task.id %>" class="sc_task sc_<%= task.css_classes %>">
+    <div class="task_no">
+  	<span class="task_track_num task_tracker task_tracker_<%=h task.tracker.id %>">
+  		<%= link_to [task.tracker, "#", task.id].join(" "),:controller => 'issues', :action => 'show', :id => task %> 
+  		<%= link_to image_tag(File.join(@plugin_path, 'images', 'new_window.svg'),size: "16x13"),{:controller => 'issues', :action => 'show', :id => task}, :target=>'_blank' %>
+  	</span>
+
+  	
+  	
+	
+
+  	<span class="task_status" title="<% if defined?(task.uis_unread) &&  (task.uis_unread==true)%><%=h l(:label_task_unread)%><%end%><% if defined?(task.uis_updated) &&  (task.uis_updated==true)%><%=h l(:label_task_updated)%><%end%>"></span>
+  	<img src="<%= File.join(@plugin_path, 'images', 'task_desc.png') %>" class="task_desc" width="12"/>
+
+
+
+  	<!--<%=h task.uis_updated%>
+  	<%=h task.uis_unread%>-->
+  </div>
+  
+  
+  <div class="task_subject" title="<%=h task.subject %>"><%=h task.subject %></div>
+  
+	<%if defined?(task.priority) %>  
+		<span class="priority"><%=task.priority%></span>
+  	<%end%>
+
+  
+	<%if defined?(task.due_date) && task.due_date   	
+			  if((task.due_date-Date.today).to_i)==0 
+				dl_word="Сегодня"
+				dl_class="dl_today"
+			  elsif((task.due_date-Date.today).to_i)==1 
+				dl_word="Завтра"
+				dl_class="dl_tomorrow"
+			  elsif((task.due_date-Date.today).to_i)==2 
+				dl_word="Послезавтра"
+				dl_class="dl_aftertomorrow"
+			  elsif((task.due_date-Date.today).to_i)==-1 
+				dl_word="Вчера"
+				dl_class="dl_yesterday dl_overdued"
+			  elsif((task.due_date-Date.today).to_i)==-2
+				dl_word="Позавчера"
+				dl_class="dl_beforeyesterday dl_overdued"
+			  elsif((task.due_date-Date.today).to_i)<0 		
+				dl_word=distance_of_date_in_words(Date.today, task.due_date) + " назад"
+				dl_class="dl_hardoverdued dl_overdued"
+			  else
+				dl_word= "через " + distance_of_date_in_words(Date.today, task.due_date)
+			  end
+		%>	  
+		<span class="deadline <%=dl_class%>">Срок: <%=dl_word%></span>
+	<%end%>  
+  
+  
+  
+  <hr class="horline"/>
+
+  
+  <div class="task_row">
+      <!--<div class="task_doneratio_slide"></div>-->
+      <a class="task_owner fr actlink"><%=h task.assigned_to %></a>
+  </div>
+  
+  <!--<div class="task_doneratio_value fl"><%=h task.done_ratio || '0' %></div>-->
+  <div class="fl task_estimate_params">
+      <!--<div class="measure fl">%</div>-->
+
+	  
+	  <div class="fl task_estimate_params">
+	      <div class="fl task_spent_time"><%=h task.spent.to_f.round(2) || '0' %></div>	    
+	  </div>
+	  
+	  
+	  <a class="task_add_spent fl actlink">
+	  	<div class="measure fl">+</div>
+	    <div class="task_add_spent_value fl">X</div>	    
+	  </a>	  
+      
+      
+      <div class="fl task_estimate_sep">/</div>
+      <a class="task_estimate fl actlink"><%=h task.estimated_hours || l(:label_sprints_placeholder_estimated) %></a>
+      <div class="measure fl">h</div>
+  </div>
+  
+  <div class="remains_time fr">Осталось: &nbsp;
+	  <div class="task_remains_time fr"><%=h (task.estimated_hours.to_f-task.spent.to_f).round(2) || 0 %></div>
+  </div>
+
+</div>

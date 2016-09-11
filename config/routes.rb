@@ -12,5 +12,5 @@ else
   match 'adsprints/(:action(/:id))', :controller => 'adsprints', :via => [:get, :post]
   match 'adtaskinl/(:action(/:id))', :controller => 'adtaskinl', :via => [:get, :post]
   match 'adtasks/(:action(/:id))', :controller => 'adtasks', :via => [:get, :post]
-  match 'admytasks', :controller => 'mytasks', :action=> 'list', :via => [:get, :post]
+  match 'admytasks', :controller => 'admytasks', :action=> 'list', :via => [:get, :post]
 end

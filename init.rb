@@ -29,4 +29,5 @@ Redmine::Plugin.register :AgileDwarf do
   menu :project_menu, :adtasks, { :controller => 'adtasks', :action => 'list' }, :caption => :label_menu_mytasks, :after => :activity, :param => :project_id
   menu :project_menu, :adsprints, { :controller => 'adsprints', :action => 'list' }, :caption => :label_menu_sprints, :after => :adtasks, :param => :project_id
   menu :project_menu, :adburndown, { :controller => 'adburndown', :action => 'show' }, :caption => :label_menu_burndown, :after => :adsprints, :param => :project_id
+  menu :top_menu, :admytasks, {:controller=>'admytasks',:action=>'list'}, :caption=>:label_my_tasks_board
 end

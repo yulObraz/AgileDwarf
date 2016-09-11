@@ -1,8 +1,8 @@
 class AdtaskinlController < ApplicationController
   unloadable
 
-  before_filter :find_project, :authorize
-
+  before_filter :find_project, :authorize, :except=> :update
+  
   def update
     task = SprintsTasks.find(params[:id])
     begin
@@ -104,6 +104,10 @@ class AdtaskinlController < ApplicationController
 
   def find_project
     # @project variable must be set before calling the authorize filter
-    @project = Project.find(params[:project_id])
+    if params[:id]
+    	@project=Project.find(Issue.find(params[:id]).project_id)
+    else
+	    @project = Project.find(params[:project_id])
+	end
   end
 end
