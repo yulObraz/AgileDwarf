@@ -195,8 +195,8 @@ a.task_estimate input, .task_add_spent_value input{
 
 .task_row
 {
-    width: 100%;
-    float: left;
+    width: 50%;
+    float: right;
     height:20px;
 }
 
@@ -386,3 +386,27 @@ a.task_estimate input, .task_add_spent_value input{
 
 
 
+/*Currently running timer */
+/*Currently running timer */
+.timer-now-running .sc_task:parent, .timer-now-paused .sc_task:parent{
+	border: 1px solid blue !important;	
+} 
+
+ 
+.sc_task .timer-startable{
+	visibility: hidden
+}
+
+.sc_task:hover .timer-startable{
+	visibility: visible
+}
+
+.sc_task.curr-timer {
+    background-color: #f5f3ff;
+    border: 2px solid #4b8fbf;
+}
+
+
+.project_info{
+	font-size: 0.8em
+}

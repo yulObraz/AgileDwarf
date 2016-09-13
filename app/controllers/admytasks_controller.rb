@@ -9,12 +9,9 @@ class AdmytasksController < ApplicationController
 
   def list
     # data for filters
-    #@project = Project.find(params[:project_id])
     @sprints = Sprints.my_sprints()
-    #@project_id = @project.id
     @assignables = User.all()
     @assignables_list = {}
-    #@project.assignable_users.each{|u| @assignables_list[u.id] = u.firstname + ' ' + u.lastname}
 
     # filter values
     @selected = params[:sprint] || (@sprints[0].nil? ? 'all' : @sprints[0].id.to_s)
@@ -37,7 +34,6 @@ class AdmytasksController < ApplicationController
       status_ids << Setting.plugin_AgileDwarf[('stcolumn' + i.to_s).to_sym].to_i
     end
     @statuses = {}
-    #IssueStatus.find_all_by_id(status_ids).each {|x| @statuses[x.id] = x.name}
     IssueStatus.find(status_ids).each {|x| @statuses[x.id] = x.name}
     @columns = []
     for i in 0 .. colcount - 1

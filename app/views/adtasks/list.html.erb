@@ -11,6 +11,7 @@
 <%= stylesheet_link_tag 'jquery-ui-1.8.18.custom.css', :plugin => 'AgileDwarf', :media => 'print,screen' %>
 <%= stylesheet_link_tag 'jquery.qtip.min.css', :plugin => 'AgileDwarf', :media => 'print,screen' %>
 
+
 <script type="text/javascript">
     Sprints.setOptions(
     {
@@ -34,6 +35,18 @@
         }
     });
 </script>
+
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('.timer-now-paused').parent().parent('.sc_task').addClass('curr-timer');
+		$('.timer-now-running').parent().parent('.sc_task').addClass('curr-timer');
+		$('.action-timer-resume, .action-timer-start, .action-timer-suspend').click(function(){
+			console.log("Timer changed, reloading page")
+			location.reload();
+		});
+	});
+	</script> 
 
 <h2><%= l(:label_menu_mytasks) %></h2>
 

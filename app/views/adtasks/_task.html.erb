@@ -52,8 +52,11 @@
 		<span class="deadline <%=dl_class%>">Срок: <%=dl_word%></span>
 	<%end%>  
   
-  
-  
+    <hr class="horline"/>
+    <span class="project_info">			
+ 	 	Проект: <%=link_to h(task.project.name), {:controller=>'projects',:action => 'show', :id => task.project.id}%>
+ 	</span>
+
   <hr class="horline"/>
 
   
@@ -61,6 +64,58 @@
       <!--<div class="task_doneratio_slide"></div>-->
       <a class="task_owner fr actlink"><%=h task.assigned_to %></a>
   </div>
+  
+  
+  
+  <div class="fl">
+
+  <% time_logger = time_logger_for(User.current) %>
+  <%if time_logger%>
+	  <% if time_logger.issue_id==task.id%>
+	  	<% if time_logger.paused==true%>
+	  		<span class="icon icon-pause timer-now-paused">
+	        <%= link_to "&#9658;".html_safe,
+	            {:controller => '/time_loggers', :action => 'resume' },
+	            {:class => 'action-timer-resume',
+	            'data-replace' => '#time-logger-menu',
+	            :remote => true}
+	        %>
+	        
+	        <%= link_to "&#9724;".html_safe,
+	            {:controller => '/time_loggers', :action => 'stop' },
+	            {:class => 'action-timer-stop'}
+	        %>	        
+	        </span>
+	  	<% else %>
+	  		<span class="icon icon-clock timer-now-running">
+	        <%= link_to "&#10074;&#10074;".html_safe,
+	            {:controller => '/time_loggers', :action => 'suspend' },
+	            {:class => 'action-timer-suspend',
+	            'data-replace' => '#time-logger-menu',
+	            :remote => true} %>	 
+	            
+	        <%= link_to "&#9724;".html_safe,
+	            {:controller => '/time_loggers', :action => 'stop' },
+	            {:class => 'action-timer-stop'} 
+	        %>		            
+	        </span>     		
+	  	<% end %>	
+	  <%end %>
+	<%else%>
+		<span class="timer-startable">
+        <%= link_to "Старт",
+            { :controller => '/time_loggers', :action => 'start', :issue_id => task.id },
+            :class => 'icon icon-start action-timer-start',
+            'data-replace' => '#time-logger-menu',
+            :remote => true
+        %>
+        </span>
+  <%end%>
+  </div>
+  
+  
+  
+  
   
   <!--<div class="task_doneratio_value fl"><%=h task.done_ratio || '0' %></div>-->
   <div class="fl task_estimate_params">

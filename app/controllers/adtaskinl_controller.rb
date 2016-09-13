@@ -21,9 +21,16 @@ class AdtaskinlController < ApplicationController
   end
 
   def create
+  	trackers_avail=@project.trackers().select('id').all().pluck(:id)
     attribs = params.select{|k,v| k != 'id' and SprintsTasks.column_names.include? k }
+    
     attribs = Hash[*attribs.flatten]
     attribs['tracker_id'] = attribs['tracker_id'] || Setting.plugin_AgileDwarf[:tracker]
+    
+	if !trackers_avail.include?(attribs['tracker_id'])    
+    	attribs['tracker_id']=@project.trackers().first()
+    end
+
     attribs['author_id'] = User.current.id
     task = SprintsTasks.new(attribs)
     begin

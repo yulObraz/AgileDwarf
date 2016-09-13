@@ -23,10 +23,8 @@ class SprintsTasks < Issue
       user = User.current.id if user == 'current'
       cond << user
     end
-    #SprintsTasks.find(:all, :select => 'issues.*, sum(hours) as spent', :order => SprintsTasks::ORDER, :conditions => cond, :group => "issues.id",
-    #                  :joins => [:status], :joins => "left join time_entries ON time_entries.issue_id = issues.id", :include => #[:assigned_to]).each{|task| tasks << task}
     SprintsTasks.select('issues.*, sum(hours) as spent').order(SprintsTasks::ORDER).where(cond).group("issues.id").joins([:status]).joins("left join time_entries ON time_entries.issue_id = issues.id").all().each{|task| tasks << task}
-    #SprintsTasks.joins([:status]).joins("left join time_entries ON time_entries.issue_id = issues.id").where(cond).select('issues.*, sum(hours) as spent').order(SprintsTasks::ORDER).include([:assigned_to]).group("issues.id",[:assigned_to]).all()
+    
     
     
     return tasks
@@ -41,14 +39,6 @@ class SprintsTasks < Issue
 
     
     cond = ["issues.project_id in (?) AND status_id = ? AND assigned_to_id = ?", projects, status, User.current.id]
-#     unless sprint.nil?
-#       if sprint == 'null'
-#         cond[0] += ' and fixed_version_id is null'
-#       else
-#         cond[0] += ' and fixed_version_id = ?'
-#         cond << sprint
-#       end
-#     end
     SprintsTasks.select('issues.*, sum(hours) as spent').order(SprintsTasks::ORDER).where(cond).group("issues.id").joins([:status]).joins("left join time_entries ON time_entries.issue_id = issues.id").all().each{|task| tasks << task}
     return tasks
   end
@@ -76,11 +66,9 @@ class SprintsTasks < Issue
       cond << user
     end
     SprintsTasks.where(cond).select('issues.*, sum(hours) as spent').group('issues.id').joins([:status]).joins("left join time_entries ON time_entries.issue_id = issues.id").include([:assigned_to]).all()
-    #SprintsTasks.find(:all, :select => 'issues.*, sum(hours) as spent', :order => SprintsTasks::ORDER, :conditions => cond, :group => "issues.id",
-    #                  :joins => [:status], :joins => "left join time_entries ON time_entries.issue_id = issues.id", :include => #[:assigned_to]).each{|task| tasks << task}
+
                       
-                      
-                      
+                                         
     return tasks
   end  
   
@@ -89,7 +77,6 @@ class SprintsTasks < Issue
   def self.get_tasks_by_sprint(project, sprint)
     projects = []
     tasks = []
-    #Project.find(:all, :select => 'id', :conditions => ["id = ? or parent_id = ?", project.id, project.id]).each{|proj| projects << proj.id}
     Project.select("id").where(["id = ? or parent_id = ?", project.id, project.id]).all().each{|proj| projects << proj.id}
     cond = ["project_id in (?) and is_closed = ?", projects, false]
     unless sprint.nil?
@@ -100,7 +87,6 @@ class SprintsTasks < Issue
         cond << sprint
       end
     end
-    #SprintsTasks.find(:all, :order => SprintsTasks::ORDER, :conditions => cond, :joins => :status, :include => :assigned_to).each{|task| tasks << task}
     SprintsTasks.order(SprintsTasks::ORDER).where(cond).joins(:status).all().each{|task| tasks << task}
     return tasks
   end
