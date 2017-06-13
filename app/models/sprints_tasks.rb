@@ -1,9 +1,9 @@
 class SprintsTasks < Issue
   unloadable
 
-  acts_as_list :column => "ir_position"
+  acts_as_list :column => "position"
 
-  ORDER = 'case when issues.ir_position is null then 1 else 0 end ASC, case when issues.ir_position is NULL then issues.id else issues.ir_position end ASC'
+  ORDER = 'case when issues.position is null then 1 else 0 end ASC, case when issues.position is NULL then issues.id else issues.position end ASC'
 
   def self.get_tasks_by_status(project, status, sprint, user)
     projects = []
@@ -111,7 +111,7 @@ class SprintsTasks < Issue
       insert_at
       move_to_bottom
     else
-      insert_at(prev.ir_position + 1)
+      insert_at(prev.position + 1)
     end
   end
 
